@@ -45,7 +45,41 @@
         }
 
         $reponse->closeCursor();
-        ?>4
+        ?>
 
+        <form method="post" action="traitement-salle.php">
+        <input type="text" name="numero_salle" id="numero_salle" /><label for="numero_salle">numero de la salle</label></br>
+        <input type="text" name="capacite_salle" id="capacite_salle" /><label for="capacite_salle">capacite de la salle</label></br>
+        <input type="submit" value="envoyer">
+        </form>
+
+
+        <?php
+        try
+        {
+           $bdd = new PDO('mysql:host=db5000303635.hosting-data.io;dbname=dbs296622;charset=utf8', 'dbu526549', 'n&3@Kk6H');
+        }
+        catch (Exception $e)
+        {
+            dir('Erreur : ' . $e->getMessage());
+        }
+
+        $reponse = $bdd->query('SELECT * From salle');
+        
+
+        while ($donnees = $reponse->fetch())
+        {
+        ?>
+           <p>
+           <strong>Id : </strong><?php echo $donnees['id_salle']; ?><br />
+           <strong>Numéro : </strong><?php echo $donnees['numero_salle']; ?><br />
+           <strong>Capacité : </strong><?php echo $donnees['capacite_salle']; ?><br />
+           <strong>Id-ciné : </strong><?php echo $donnees['id_cinema']; ?><br />
+           </p>
+        <?php
+        }
+
+        $reponse->closeCursor();
+        ?>
     </body>
 </html>
