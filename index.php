@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
+
+        <h2>entrer un cinéma</h2>
         <form method="post" action="bdd_post.php">
            <input type="text" name="nom_cinema" id="nom_cinema" /><label for="nom_cinema">nom du cinema</label></br>
            <input type="text" name="ville_cinema" id="ville_cinema" /><label for="ville_cinema">nom de la ville</label></br>
@@ -47,10 +49,13 @@
         $reponse->closeCursor();
         ?>
 
+
+
+        <h2>entrer une salle</h2>
         <form method="post" action="traitement-salle.php">
-        <input type="text" name="numero_salle" id="numero_salle" /><label for="numero_salle">numero de la salle</label></br>
-        <input type="text" name="capacite_salle" id="capacite_salle" /><label for="capacite_salle">capacite de la salle</label></br>
-        <input type="submit" value="envoyer">
+           <input type="text" name="numero_salle" id="numero_salle" /><label for="numero_salle">numero de la salle</label></br>
+           <input type="text" name="capacite_salle" id="capacite_salle" /><label for="capacite_salle">capacite de la salle</label></br>
+           <input type="submit" value="envoyer">
         </form>
 
 
@@ -75,6 +80,42 @@
            <strong>Numéro : </strong><?php echo $donnees['numero_salle']; ?><br />
            <strong>Capacité : </strong><?php echo $donnees['capacite_salle']; ?><br />
            <strong>Id-ciné : </strong><?php echo $donnees['id_cinema']; ?><br />
+           </p>
+        <?php
+        }
+
+        $reponse->closeCursor();
+        ?>
+
+
+
+
+       <h2>entrer un équipement</h2>
+        <form method="post" action="equipement.php">
+           <input type="text" name="nom_equipement" id="nom_equipement" /><label for="nom_equipement">nom de l'équipement</label></br>
+           <input type="submit" value="envoyer">
+        </form>
+
+
+        <?php
+        try
+        {
+           $bdd = new PDO('mysql:host=db5000303635.hosting-data.io;dbname=dbs296622;charset=utf8', 'dbu526549', 'n&3@Kk6H');
+        }
+        catch (Exception $e)
+        {
+            dir('Erreur : ' . $e->getMessage());
+        }
+
+        $reponse = $bdd->query('SELECT * From equipement');
+        
+
+        while ($donnees = $reponse->fetch())
+        {
+        ?>
+           <p>
+           <strong>Id : </strong><?php echo $donnees['id_equipement']; ?><br />
+           <strong>Nom : </strong><?php echo $donnees['nom_equipement']; ?><br />
            </p>
         <?php
         }
